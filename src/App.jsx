@@ -136,13 +136,6 @@ export default function App() {
             Turn plain text into chaotic meme energy for jokes, reactions, and dramatic
             nonsense. Your saved remixes even drift through the background.
           </p>
-
-          <div className="feature-pills">
-            <span>Built-in Modes</span>
-            <span>Community Modes</span>
-            <span>Saved History</span>
-            <span>Glossy Glass UI</span>
-          </div>
         </section>
 
         <section className="studio-card" id="studio">
