@@ -1,11 +1,4 @@
-export const MODES = [
-  { value: "randomCaps", label: "Random Caps" },
-  { value: "runic", label: "Runic Fantasy" },
-  { value: "dramatic", label: "Dramatic Stretch" },
-  { value: "tiny", label: "Tiny Shout" },
-  { value: "british", label: "Bri'ish Banter" },
-  { value: "australian", label: "Mate Mode" }
-];
+import { createMode, preserveCase } from "./helpers";
 
 const runicMap = {
   a: "ᔑ",
@@ -88,14 +81,6 @@ function tinyTransform(text, intensity) {
     .join(separator);
 }
 
-function preserveCase(source, replacement) {
-  if (source.toUpperCase() === source) return replacement.toUpperCase();
-  if (source[0] && source[0].toUpperCase() === source[0]) {
-    return replacement[0].toUpperCase() + replacement.slice(1);
-  }
-  return replacement;
-}
-
 function britishTransform(text, intensity) {
   let result = text;
   const replacements = [
@@ -166,21 +151,41 @@ function australianTransform(text, intensity) {
   return result;
 }
 
-export function transformText(text, mode, intensity) {
-  switch (mode) {
-    case "randomCaps":
-      return randomCapsTransform(text, intensity);
-    case "runic":
-      return runicTransform(text);
-    case "dramatic":
-      return dramaticTransform(text, intensity);
-    case "tiny":
-      return tinyTransform(text, intensity);
-    case "british":
-      return britishTransform(text, intensity);
-    case "australian":
-      return australianTransform(text, intensity);
-    default:
-      return text;
-  }
-}
+export const builtInModes = [
+  createMode({
+    value: "randomCaps",
+    label: "Random Caps",
+    description: "Alternates upper and lower case for chaotic meme energy.",
+    transform: randomCapsTransform
+  }),
+  createMode({
+    value: "runic",
+    label: "Runic Fantasy",
+    description: "Maps letters into a fantasy runic-looking alphabet.",
+    transform: runicTransform
+  }),
+  createMode({
+    value: "dramatic",
+    label: "Dramatic Stretch",
+    description: "Adds elongated vowels and bursts of exclamation marks.",
+    transform: dramaticTransform
+  }),
+  createMode({
+    value: "tiny",
+    label: "Tiny Shout",
+    description: "Starts small and snaps into all caps per word.",
+    transform: tinyTransform
+  }),
+  createMode({
+    value: "british",
+    label: "Bri'ish Banter",
+    description: "Meme-style banter voice with light slang swaps.",
+    transform: britishTransform
+  }),
+  createMode({
+    value: "australian",
+    label: "Mate Mode",
+    description: "Adds playful Aussie-flavored slang to the text.",
+    transform: australianTransform
+  })
+];

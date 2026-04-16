@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MODES, transformText } from "./transforms";
+import { MODES, transformText } from "./modes";
 
 const HISTORY_KEY = "mockit-history";
 const MAX_HISTORY = 8;
@@ -136,6 +136,13 @@ export default function App() {
             Turn plain text into chaotic meme energy for jokes, reactions, and dramatic
             nonsense. Your saved remixes even drift through the background.
           </p>
+
+          <div className="feature-pills">
+            <span>Built-in Modes</span>
+            <span>Community Modes</span>
+            <span>Saved History</span>
+            <span>Glossy Glass UI</span>
+          </div>
         </section>
 
         <section className="studio-card" id="studio">
@@ -176,6 +183,9 @@ export default function App() {
                   </option>
                 ))}
               </select>
+              <p className="mode-description">
+                {MODES.find((entry) => entry.value === mode)?.description ?? "Custom remix mode"}
+              </p>
             </div>
 
             <div className="control-group">
